@@ -1,0 +1,57 @@
+import java.util.Arrays;
+public class Block {
+
+    private int previousHash;
+    private String[] transactions;
+
+    private int blockHash;
+
+    public Block(int previousHash, String[] transactions){
+        this.previousHash = previousHash;
+        this.transactions = transactions;
+
+        Object[] contens = {Arrays.hashCode(transactions), previousHash};
+        this.blockHash = Arrays.hashCode(contens);
+
+    }
+
+    public int getPreviousHash() {
+        return previousHash;
+    }
+
+    public String[] getTransaction () {
+        return transactions;
+    }
+
+    public String[] getBlockHash() {
+        return blockHash;
+    }
+
+    public static void main (String[] args) {
+
+    }
+}
+
+public class Main {
+
+    ArrayList<Block> blockchain = new ArrayList<>();
+
+    public static void main(String []args){
+
+         String[] genesisTransactions = {"Satoshi sent Ivan 10 bitcoins"," Hal Finney sent 10 bitcoins to Ivan"};
+         Block genesisBlock = new Block(previousHash: 0,genesisTransactions);
+
+         String[] block2Transactions = {"Ivan sent 10 bitcoin to Satoshi","Satoshi sent 10 bitcoin to Starbucks"};
+         Block block2 = new Block(genesisBlock.getBlockHash(), block2Transactions);
+
+         String[] block3Transactions = {"Satoshi sent Ivan 990 bitcoin to Tesla"," Hal Finney sent 100 bitcoins to my mom"};
+         Block block3 = new Block(block2.getBlockHash(), block3Transactions);
+
+         System.out.println("Hash of genesis block: ");
+         System.out.println(genesisBlock.getBlockHash());
+         System.out.println("Hash of block 2: ");
+         System.out.println(block2.getBlockHash());
+         System.out.println("Hash of block 3: ");
+         System.out.println(block3.getBlockHash());
+     }
+}
